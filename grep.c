@@ -6,7 +6,6 @@ int MAXLEN = 1000;
 void find(char* key, int keysize, char* filename, int indices[MAXLEN]);
 int set_charlen(char* key);
 
-
 int main(int argc, char** argv) {
 
   if(argc != 3) {
@@ -15,7 +14,11 @@ int main(int argc, char** argv) {
   }
   
   char* key = argv[1];
-  char* fname = argv[2];  
+  char* fname = argv[2];
+
+  if(!(key && fname))
+    return EXIT_FAILURE;
+  
   int indices[MAXLEN];
   int keysize = set_charlen(key);
 
