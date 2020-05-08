@@ -13,14 +13,11 @@ int main(int argc, char** argv) {
     return EXIT_FAILURE;
   }
   
-  char* key = argv[1];
-  char* fname = argv[2];
-
+  char* key = argv[1], *fname = argv[2];
+  int indices[MAXLEN], keysize = set_charlen(key);
+  
   if(!(key && fname))
     return EXIT_FAILURE;
-  
-  int indices[MAXLEN];
-  int keysize = set_charlen(key);
 
   find(key, keysize, fname, indices);
   
@@ -28,14 +25,10 @@ int main(int argc, char** argv) {
 }
 
 void find(char* key, int keysize, char* filename, int indices[MAXLEN]) {
-  
-  if(key && filename)
-    printf("Searching for \"%s\" in \"%s\"\n", key, filename);
 
   FILE* fptr = fopen(filename, "r");
   char str[MAXLEN];
-  int current_line_num = 0;
-  int indices_index = 0;
+  int current_line_num = 0, indices_index = 0;
   
   while(fgets(str, MAXLEN, fptr)) {
     int i = 0;
@@ -56,7 +49,6 @@ void find(char* key, int keysize, char* filename, int indices[MAXLEN]) {
     }
     ++current_line_num;
   }
-
 
   for(int i = 0; i < indices_index; ++i) {
     printf("found on line: %d\n", indices[i]);
